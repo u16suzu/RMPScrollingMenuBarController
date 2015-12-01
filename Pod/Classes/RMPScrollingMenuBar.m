@@ -481,9 +481,9 @@
             dur = 0.6;
         }
         
-        [UIView animateWithDuration:dur
-                              delay:0.16
-             usingSpringWithDamping:0.8
+        [UIView animateWithDuration:0
+                              delay:0.0
+             usingSpringWithDamping:0.0
               initialSpringVelocity:0.1
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^{
@@ -492,11 +492,11 @@
                              f.size.width = _selectedItem.button.frame.size.width + 6;
                              _indicatorView.frame = f;
                          } completion:^(BOOL finished) {
-                             self.userInteractionEnabled = YES;
-                             if([_delegate respondsToSelector:@selector(menuBar:didSelectItem:direction:)]){
-                                 [_delegate menuBar:self didSelectItem:_selectedItem direction:direction];
-                             }
                          }];
+        self.userInteractionEnabled = YES;
+        if([_delegate respondsToSelector:@selector(menuBar:didSelectItem:direction:)]){
+            [_delegate menuBar:self didSelectItem:_selectedItem direction:direction];
+        }
     }else if(_style == RMPScrollingMenuBarStyleInfinitePaging){
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self reorderItemsForInfinitePaging];
